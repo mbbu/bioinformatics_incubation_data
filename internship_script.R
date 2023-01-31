@@ -1,4 +1,5 @@
-setwd("/Users/caleb/Library/CloudStorage/OneDrive-InternationalCentreofInsectPhysiologyandEcology(ICIPE)/ICIPE_Documents/Bioinformatics_Incubation_Manuscript/Internship surveys")
+setwd("./Bioinformatics_Incubtion_Data")
+
 
 library(readxl)
 library(ggplot2)
@@ -11,7 +12,7 @@ library(ggpubr)
 #################################################################################
 ###########Introduction to Command line
 
-data <- read_excel("./Introduction to Commandline.xlsx")
+data <- read_excel("Introduction to Commandline.xlsx")
 
 Commandline<- ggplot(data, aes(x=Cohort, y=Scores, 
                        fill=factor(Season, levels = c("Pre-Internship", "Post-Internship")))) +
@@ -61,7 +62,7 @@ hpc<- ggplot(data, aes(x=Cohort, y=Scores,
   theme_classic()+
   labs(fill = "")+
   theme(legend.position = "none")+
-  ggtitle("C.    HPC")
+  ggtitle("A.    HPC")
 hpc + theme(text = element_text(size = 10)) 
 
 ggplot2::ggsave(filename = "hpc.png",
@@ -80,7 +81,7 @@ python<- ggplot(data, aes(x=Cohort, y=Scores,
   theme_classic()+
   labs(fill = "")+
   theme(legend.position = "none")+
-  ggtitle("E.    Python")
+  ggtitle("A.    Python")
 
 ggplot2::ggsave(filename = "Python.png",
                 plot = python, width = 5, height = 8, units = "in")
@@ -97,7 +98,7 @@ R<- ggplot(data, aes(x=Cohort, y=Scores,
   theme_classic()+
   labs(fill = "")+
   theme(legend.position = "none")+
-  ggtitle("F.    R and Rmarkdown")
+  ggtitle("B.    R and Rmarkdown")
 R + theme(text = element_text(size = 10)) 
 
 
@@ -116,7 +117,7 @@ pipeline<- ggplot(data, aes(x=Cohort, y=Scores,
   theme_classic()+
   labs(fill = "Pipeline")+
   theme(legend.position = "none")+
-  ggtitle("D.    Pipelines and Workflows")
+  ggtitle("B.    Pipelines and Workflows")
 
 pipeline + theme(text = element_text(size = 10))                    # All font sizes
 
@@ -130,16 +131,16 @@ ggplot2::ggsave(filename = "Pipeline.png",
 #Arrange the plots
 arrange <- ggarrange(Commandline + rremove("xlab"), Git + rremove("ylab") + rremove("xlab"),
           common.legend = TRUE, legend = "bottom")
-ggsave("Commandline_Git.png", arrange, width = 8, height = 3)
+ggsave("Fig3_Commandline_Git.png", arrange, width = 8, height = 3)
 
 arrange <- ggarrange(hpc+ rremove("xlab"),pipeline+ rremove("xlab")+ rremove("ylab"),
           common.legend = TRUE, legend = "bottom")
 
-ggsave("hpc_pipeline.png", arrange, width = 8, height = 3)
+ggsave("Fig4_hpc_pipeline.png", arrange, width = 8, height = 3)
 
 arrange <- ggarrange(python+ rremove("xlab"), R+ rremove("xlab")+ rremove("ylab"),
           common.legend = TRUE, legend = "bottom")
-ggsave("python_R.png", arrange, width = 8, height = 3)
+ggsave("Fig5_python_R.png", arrange, width = 8, height = 3)
 
 #plot_grid(Commandline, Git, hpc,pipeline, python, R, labels = "AUTO", scale = c(1, .9, .9, .7))
 ################################################################################
